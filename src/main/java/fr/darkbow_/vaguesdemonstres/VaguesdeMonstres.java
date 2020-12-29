@@ -27,6 +27,10 @@ public class VaguesdeMonstres extends JavaPlugin {
     public int monstresbasiquesinitial = 10;
     public int monstresvener = 15; //20 minutes = 1200
     public int monstresvenerinitial = 15;
+    public int nextmonstresvener = 0;
+    public int randomvener = 100;
+    public int restantbasique = -1;
+    public int restantvener = -1;
     public boolean VaguesdeMonstres = false;
     public boolean EstEnPause = false;
 
@@ -47,6 +51,10 @@ public class VaguesdeMonstres extends JavaPlugin {
         this.veulentvoirinfos = new HashMap<>();
 
         Random r = new Random();
+        this.nextmonstresvener = this.monstresvener;
+        this.randomvener = 100;
+        this.restantbasique = this.monstresbasiques;
+        this.restantvener = this.monstresvener;
 
         this.badblocks = new HashSet<>();
         badblocks.add(Material.LAVA);

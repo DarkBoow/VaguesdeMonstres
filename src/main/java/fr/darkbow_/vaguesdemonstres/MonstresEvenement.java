@@ -60,7 +60,11 @@ public class MonstresEvenement implements Listener {
                     tempsrestant = main.timer%main.monstresvener;
                 }
 
-                sb.setLine(5, ChatColor.BLUE + "Prochain Spawn : " + ChatColor.WHITE + main.getTimeFormat(tempsrestant));
+                main.restantvener = main.monstresvener - main.timer%main.monstresvener;
+
+                sb.setLine(5, ChatColor.BLUE + "Basiques : " + ChatColor.WHITE + main.getTimeFormat(main.restantbasique));
+                sb.setLine(6, "§c");
+                sb.setLine(7, ChatColor.DARK_PURPLE + "§lTERRIIIBLE : " + ChatColor.WHITE + main.getTimeFormat(main.restantvener));
 
                 main.getBoards().put(player, sb);
             }

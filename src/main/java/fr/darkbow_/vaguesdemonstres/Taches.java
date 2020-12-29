@@ -97,29 +97,83 @@ public class Taches extends BukkitRunnable {
                                 main.getMonstres().put(pls, entitieslist);
                             }
 
-                            int entite = r.nextInt(22);
+                            int entite = r.nextInt(main.randomvener);
 
                             EntityType etype = null;
 
                             switch (entite){
                                 case 0: case 1:
-                                    etype = EntityType.BLAZE;
+                                    etype = EntityType.ZOMBIE_VILLAGER;
                                     break;
                                 case 2: case 3:
-                                    etype = EntityType.EVOKER;
+                                    etype = EntityType.DROWNED;
                                     break;
                                 case 4: case 5:
-                                    etype = EntityType.ILLUSIONER;
+                                    etype = EntityType.ZOMBIFIED_PIGLIN;
                                     break;
                                 case 6: case 7:
-                                    etype = EntityType.PHANTOM;
+                                    etype = EntityType.BLAZE;
                                     break;
                                 case 8: case 9:
+                                    etype = EntityType.EVOKER;
+                                    break;
+                                case 10: case 11:
+                                    etype = EntityType.ILLUSIONER;
+                                    break;
+                                case 12: case 13:
+                                    etype = EntityType.PHANTOM;
+                                    break;
+                                case 14: case 15:
                                     etype = EntityType.PILLAGER;
                                     break;
-                                case 10:
+                                case 16: case 17:
+                                    etype = EntityType.ENDERMITE;
+                                    break;
+                                case 18: case 19:
+                                    etype = EntityType.HOGLIN;
+                                    break;
+                                case 20: case 21:
+                                    etype = EntityType.MAGMA_CUBE;
+                                    break;
+                                case 22: case 23:
+                                    etype = EntityType.PIGLIN;
+                                    break;
+                                case 24: case 25:
+                                    etype = EntityType.STRAY;
+                                    break;
+                                case 26: case 27:
+                                    etype = EntityType.SLIME;
+                                    break;
+                                case 28: case 29:
+                                    etype = EntityType.VEX;
+                                    break;
+                                case 30: case 31:
+                                    etype = EntityType.VINDICATOR;
+                                    break;
+                                case 32: case 33:
+                                    etype = EntityType.WITCH;
+                                    break;
+                                case 34:
+                                    etype = EntityType.ZOGLIN;
+                                    break;
+                                case 35: case 36:
+                                    etype = EntityType.WITHER_SKELETON;
+                                    break;
+                                case 37:
                                     etype = EntityType.RAVAGER;
                                     break;
+                            }
+
+                            if(main.randomvener > 38){
+                                if(main.randomvener >= 48){
+                                    main.randomvener = main.randomvener - 10;
+                                } else {
+                                    main.randomvener = 38;
+                                }
+
+                                double test = (double) (38/main.randomvener);
+
+                                pls.sendMessage("§9Spawn de Monstres Terrifiants descendu à §l" + (Math.round(test*100)/100) + "%§9...");
                             }
 
                             if(etype == null){
@@ -134,6 +188,8 @@ public class Taches extends BukkitRunnable {
                                 }
                             }
                         }
+
+                        main.nextmonstresvener = main.timer + (main.monstresvener - main.timer%main.monstresvener);
                     }
                 }
 
@@ -174,18 +230,18 @@ public class Taches extends BukkitRunnable {
                     boards.getValue().setLine(4, "§d");
 
                     int tempsrestant = -1;
-                    int restantbasique = -1;
-                    int restantvener = -1;
 
-                    restantbasique = main.monstresbasiques - main.timer%main.monstresbasiques;
-                    restantvener = main.monstresvener - main.timer%main.monstresvener;
-                    if(restantbasique <= restantvener){
-                        tempsrestant = restantbasique;
+                    main.restantbasique = main.monstresbasiques - main.timer%main.monstresbasiques;
+                    main.restantvener = main.monstresvener - main.timer%main.monstresvener;
+                    if(main.restantbasique <= main.restantvener){
+                        tempsrestant = main.restantbasique;
                     } else {
-                        tempsrestant = restantvener;
+                        tempsrestant = main.restantvener;
                     }
 
-                    boards.getValue().setLine(5, ChatColor.BLUE + "Prochain Spawn : " + ChatColor.WHITE + main.getTimeFormat(tempsrestant));
+                    boards.getValue().setLine(5, ChatColor.BLUE + "Basiques : " + ChatColor.WHITE + main.getTimeFormat(main.restantbasique));
+                    boards.getValue().setLine(6, "§c");
+                    boards.getValue().setLine(7, ChatColor.DARK_PURPLE + "§lTERRIIIBLE : " + ChatColor.WHITE + main.getTimeFormat(main.restantvener));
                 }
 
                 main.timer++;

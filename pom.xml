@@ -8,12 +8,25 @@
     <artifactId>VaguesdeMonstres</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <repositories>
+        <repository>
+            <id>puha-repo</id>
+            <url>https://repo.puha.io/repo/</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot</artifactId>
             <version>1.16.4-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.puharesource.mc</groupId>
+            <artifactId>TitleManager</artifactId>
+            <version>2.2.0</version>
         </dependency>
     </dependencies>
 

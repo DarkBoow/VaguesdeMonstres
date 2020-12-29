@@ -53,7 +53,13 @@ public class CommandVaguesdeMonstres implements CommandExecutor {
                                     tempsrestant = main.timer%main.monstresvener;
                                 }
 
-                                boards.getValue().setLine(5, ChatColor.BLUE + "Prochain Spawn : " + ChatColor.WHITE + main.getTimeFormat(tempsrestant));
+                                main.restantvener = main.monstresvener - main.timer%main.monstresvener;
+
+                                main.nextmonstresvener = main.timer + (main.monstresvener - main.timer%main.monstresvener);
+
+                                boards.getValue().setLine(5, ChatColor.BLUE + "Basiques : " + ChatColor.WHITE + main.getTimeFormat(main.restantbasique));
+                                boards.getValue().setLine(6, "§c");
+                                boards.getValue().setLine(7, ChatColor.DARK_PURPLE + "§lTERRIIIBLE : " + ChatColor.WHITE + main.getTimeFormat(main.restantvener));
                             }
                         }
                     }
@@ -115,9 +121,11 @@ public class CommandVaguesdeMonstres implements CommandExecutor {
                             }
                         }
 
+                        main.randomvener = 100;
+
                         main.timer = 0;
 
-                        Bukkit.broadcastMessage("§cVagues de Monstres §6§lDésactivées §c!");
+                        Bukkit.broadcastMessage("§cVagues de Monstres §a§lDésactivées §c!");
                     } else {
                         sender.sendMessage("§cLes Vagues de Monstres ne sont pas Activées.");
                     }
