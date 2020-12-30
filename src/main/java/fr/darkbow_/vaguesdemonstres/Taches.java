@@ -84,7 +84,16 @@ public class Taches extends BukkitRunnable {
                                     }
                                 }
 
-                                pls.sendMessage("§bSpawn de la Horde de Monstres Basiques");
+                                int monstres = 0;
+                                if(main.getMonstres().containsKey(pls)){
+                                    if(main.getMonstres().get(pls).size() > 0){
+                                        monstres = main.getMonstres().get(pls).size();
+                                    }
+                                }
+
+                                monstres = monstres + 1;
+
+                                pls.sendMessage("§cSpawn de " + monstres + " Monstres");
                             }
                         }
                     }
@@ -171,20 +180,21 @@ public class Taches extends BukkitRunnable {
                                     main.randomvener = 38;
                                 }
 
-                                double test = (double) (38/main.randomvener);
+                                double spawnpurcent = (double) main.randomvener;
+                                spawnpurcent = (38/spawnpurcent)*100;
 
-                                pls.sendMessage("§9Spawn de Monstres Terrifiants descendu à §l" + (Math.round(test*100)/100) + "%§9...");
+                                pls.sendMessage("§5Chance de Spawn du Montre Terrifiant descendue à §d§l" + Math.round(spawnpurcent) + "%§5...");
                             }
 
                             if(etype == null){
-                                pls.sendMessage("§cAucun Monstre Terrifiant n'est apparu, c'est Dommage...");
+                                pls.sendMessage("§dAucun Monstre Terrifiant n'est apparu, §lc'est Dommage...");
                             } else {
                                 Entity entity = VaguesdeMonstres.spawnEntity(etype, pls.getLocation(), 5, 3);
                                 if(main.timer >= 3600){
                                     main.getMonstres().get(pls).add(etype);
-                                    pls.sendMessage("§cSpawn du Monstre Terrifiant §b§l+ §cAjout du Monstre à la §lHorde de monstres basiques\n§bT'as pas Fini le jeu assez vite, §6§lCHEH !!");
+                                    pls.sendMessage("§5Spawn du Monstre Terrifiant\n§6§l+1 à la §lHorde de Monstres\n§bT'as pas Fini le jeu assez vite, §6§lCHEH !!");
                                 } else {
-                                    pls.sendMessage("§cSpawn du Monstre Terrifiant");
+                                    pls.sendMessage("§5Spawn du Monstre Terrifiant");
                                 }
                             }
                         }
@@ -255,7 +265,10 @@ public class Taches extends BukkitRunnable {
                             pluriel = "s";
                         }
 
-                        main.title.sendActionBar(pls, "§4§l" + monstres + " Monstre" + pluriel + " : §c" + main.getTimeFormat(main.restantbasique) + " §2| §5§lTERRIIIBLE : §9" + main.getTimeFormat(main.restantvener));
+                        double spawnpurcent = (double) main.randomvener;
+                        spawnpurcent = (38/spawnpurcent)*100;
+
+                        main.title.sendActionBar(pls, "§4§l" + monstres + " Monstre" + pluriel + " : §c" + main.getTimeFormat(main.restantbasique) + " §2| §5§lTERRIIIBLE : §b" + main.getTimeFormat(main.restantvener) + " (§3" + Math.round(spawnpurcent) + "%§b)");
                     }
                 }
 

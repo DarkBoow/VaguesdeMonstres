@@ -26,8 +26,4 @@ public class Titles {
         final PacketPlayOutChat packet = new PacketPlayOutChat(basetitle, ChatMessageType.GAME_INFO, player.getUniqueId());
         ((CraftPlayer)player).getHandle().playerConnection.sendPacket((Packet)packet);
     }
-
-    public void sendMessage(Player player, String message){
-        player.sendMessage(message);
-    }
 }
