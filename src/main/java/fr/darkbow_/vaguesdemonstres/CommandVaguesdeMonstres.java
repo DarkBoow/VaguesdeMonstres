@@ -1,6 +1,7 @@
 package fr.darkbow_.vaguesdemonstres;
 
 import fr.darkbow_.vaguesdemonstres.scoreboard.ScoreboardSign;
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -164,6 +165,30 @@ public class CommandVaguesdeMonstres implements CommandExecutor {
                     player.sendMessage(ChatColor.BLUE + "Informations de la Barre d'Actions " + main.bool(main.VeulentVoirInfosActionBar().get(player), 1));
                 } else {
                     sender.sendMessage("§cSeuls les Joueurs peuvent exécuter cette commande.");
+                }
+            }
+        }
+
+        if(args.length == 3){
+            if(args[0].equalsIgnoreCase("set")){
+                if(args[1].equalsIgnoreCase("horde")){
+                    if(StringUtils.isNumeric(args[2])){
+                        int delaihorde = Integer.parseInt(args[2]);
+                        main.monstresbasiques = delaihorde;
+                        main.monstresbasiquesinitial = delaihorde;
+                        main.restantbasique = main.monstresbasiques - main.timer%main.monstresbasiques;
+                        Bukkit.broadcastMessage("§4[VDM] §3Délai d'apparition de la §cHorde Monstrueuse §3ajusté à §d§l" + main.getTimeFormat(main.monstresbasiques) + " §3!!");
+                    }
+                }
+
+                if(args[1].equalsIgnoreCase("terrifiant")){
+                    if(StringUtils.isNumeric(args[2])){
+                        int delaiterrifiant = Integer.parseInt(args[2]);
+                        main.monstresvener = delaiterrifiant;
+                        main.monstresvenerinitial = delaiterrifiant;
+                        main.restantvener = main.monstresvener - main.timer%main.monstresvener;
+                        Bukkit.broadcastMessage("§4[VDM] §3Délai d'apparition du §5Monstre Terrifiant §3ajusté à §d§l" + main.getTimeFormat(main.monstresvener) + " §3!!");
+                    }
                 }
             }
         }

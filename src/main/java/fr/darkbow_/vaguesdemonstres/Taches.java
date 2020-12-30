@@ -92,8 +92,13 @@ public class Taches extends BukkitRunnable {
                                     }
                                 }
 
-                                pls.sendMessage("§cSpawn de " + monstres + " Monstres");
-                                pls.playSound(pls.getLocation(), Sound.ENTITY_ZOMBIE_AMBIENT, 1f, 1f);
+                                String pluriel = "";
+                                if(monstres > 1){
+                                    pluriel = "s";
+                                }
+
+                                pls.sendMessage("§cSpawn de " + monstres + " Monstre" + pluriel);
+                                pls.playSound(pls.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
                             }
                         }
                     }
@@ -189,7 +194,7 @@ public class Taches extends BukkitRunnable {
                                 double spawnpurcent = (double) main.randomvener;
                                 spawnpurcent = (39/spawnpurcent)*100;
 
-                                pls.sendMessage("§5Chance de Spawn du Montre Terrifiant descendue à §d§l" + Math.round(spawnpurcent) + "%§5...");
+                                pls.sendMessage("§5Chance de Spawn du Montre Terrifiant augmentée à §d§l" + Math.round(spawnpurcent) + "%§5...");
                             }
 
                             if(etype == null){
@@ -204,7 +209,7 @@ public class Taches extends BukkitRunnable {
                                 }
                             }
 
-                            pls.playSound(pls.getLocation(), Sound.ENTITY_WITHER_SHOOT, 1f, 1f);
+                            pls.playSound(pls.getLocation(), Sound.ENTITY_WITHER_AMBIENT, 1f, 1f);
                         }
 
                         main.nextmonstresvener = main.timer + (main.monstresvener - main.timer%main.monstresvener);
@@ -276,7 +281,7 @@ public class Taches extends BukkitRunnable {
                         double spawnpurcent = (double) main.randomvener;
                         spawnpurcent = (38/spawnpurcent)*100;
 
-                        main.title.sendActionBar(pls, "§4§l" + monstres + " Monstre" + pluriel + " : §c" + main.getTimeFormat(main.restantbasique) + " §2| §5§lTERRIIIBLE : §b" + main.getTimeFormat(main.restantvener) + " (§3" + Math.round(spawnpurcent) + "%§b)");
+                        main.title.sendActionBar(pls, "§4§l" + monstres + " Monstre" + pluriel + " : §c" + main.getTimeFormat(main.restantbasique) + " §2| §d§lTERRIIIBLE : §b" + main.getTimeFormat(main.restantvener) + " (§6" + Math.round(spawnpurcent) + "%§b)");
                     }
                 }
 

@@ -138,7 +138,7 @@ public class VaguesdeMonstres extends JavaPlugin {
 
         String texteminutes = "";
         if(seconds >= 60){
-            texteminutes = minute + "m";
+            texteminutes = minute + "min";
         }
 
         return textejour + texteheures + texteminutes + seconde + "s";
