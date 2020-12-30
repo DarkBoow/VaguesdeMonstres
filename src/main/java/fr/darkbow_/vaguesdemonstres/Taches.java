@@ -3,6 +3,7 @@ package fr.darkbow_.vaguesdemonstres;
 import fr.darkbow_.vaguesdemonstres.scoreboard.ScoreboardSign;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -91,9 +92,8 @@ public class Taches extends BukkitRunnable {
                                     }
                                 }
 
-                                monstres = monstres + 1;
-
                                 pls.sendMessage("§cSpawn de " + monstres + " Monstres");
+                                pls.playSound(pls.getLocation(), Sound.ENTITY_ZOMBIE_AMBIENT, 1f, 1f);
                             }
                         }
                     }
@@ -171,17 +171,23 @@ public class Taches extends BukkitRunnable {
                                 case 37:
                                     etype = EntityType.RAVAGER;
                                     break;
+                                case 38:
+                                    int witherchance = r.nextInt(4);
+                                    if(witherchance == 1){
+                                        etype = EntityType.WITHER;
+                                    }
+                                    break;
                             }
 
-                            if(main.randomvener > 38){
-                                if(main.randomvener >= 48){
+                            if(main.randomvener > 39){
+                                if(main.randomvener >= 49){
                                     main.randomvener = main.randomvener - 10;
                                 } else {
-                                    main.randomvener = 38;
+                                    main.randomvener = 39;
                                 }
 
                                 double spawnpurcent = (double) main.randomvener;
-                                spawnpurcent = (38/spawnpurcent)*100;
+                                spawnpurcent = (39/spawnpurcent)*100;
 
                                 pls.sendMessage("§5Chance de Spawn du Montre Terrifiant descendue à §d§l" + Math.round(spawnpurcent) + "%§5...");
                             }
@@ -190,13 +196,15 @@ public class Taches extends BukkitRunnable {
                                 pls.sendMessage("§dAucun Monstre Terrifiant n'est apparu, §lc'est Dommage...");
                             } else {
                                 Entity entity = VaguesdeMonstres.spawnEntity(etype, pls.getLocation(), 5, 3);
-                                if(main.timer >= 3600){
+                                if(main.timer >= 1800){
                                     main.getMonstres().get(pls).add(etype);
                                     pls.sendMessage("§5Spawn du Monstre Terrifiant\n§6§l+1 à la §lHorde de Monstres\n§bT'as pas Fini le jeu assez vite, §6§lCHEH !!");
                                 } else {
                                     pls.sendMessage("§5Spawn du Monstre Terrifiant");
                                 }
                             }
+
+                            pls.playSound(pls.getLocation(), Sound.ENTITY_WITHER_SHOOT, 1f, 1f);
                         }
 
                         main.nextmonstresvener = main.timer + (main.monstresvener - main.timer%main.monstresvener);
