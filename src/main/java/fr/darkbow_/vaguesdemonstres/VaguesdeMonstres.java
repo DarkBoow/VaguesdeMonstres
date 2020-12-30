@@ -1,7 +1,6 @@
 package fr.darkbow_.vaguesdemonstres;
 
 import fr.darkbow_.vaguesdemonstres.scoreboard.ScoreboardSign;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -18,10 +17,12 @@ import java.util.concurrent.TimeUnit;
 public class VaguesdeMonstres extends JavaPlugin {
     public static BukkitTask task;
     private VaguesdeMonstres instance;
+    public Titles title = new Titles();
     public int timer = 0;
     private List<Player> survivants;
     private HashMap<Player, List<EntityType>> monstres;
     private HashMap<Player, Boolean> veulentvoirinfos;
+    private HashMap<Player, Boolean> voirinfosactionbar;
     private HashSet<Material> badblocks;
     public int monstresbasiques = 10; //5 minutes = 300
     public int monstresbasiquesinitial = 10;
@@ -49,6 +50,7 @@ public class VaguesdeMonstres extends JavaPlugin {
         this.survivants = new ArrayList<>();
         this.monstres = new HashMap<>();
         this.veulentvoirinfos = new HashMap<>();
+        this.voirinfosactionbar = new HashMap<>();
 
         Random r = new Random();
         this.nextmonstresvener = this.monstresvener;
@@ -154,14 +156,29 @@ public class VaguesdeMonstres extends JavaPlugin {
         return VeulentVoirInfos().get(player);
     }
 
-    public String bool(boolean b){
+    public String bool(boolean b, int i){
         String bool = null;
-        if(b){
-            bool = ChatColor.GREEN + "§lAffiché";
-        } else {
-            bool = ChatColor.RED + "§lCaché";
+        switch (i){
+            case 0:
+                if(b){
+                    bool = ChatColor.GREEN + "§lAffiché";
+                } else {
+                    bool = ChatColor.RED + "§lCaché";
+                }
+                break;
+            case 1:
+                if(b){
+                    bool = ChatColor.GREEN + "§lAffichées";
+                } else {
+                    bool = ChatColor.RED + "§lCachées";
+                }
+                break;
         }
 
         return bool;
+    }
+
+    public HashMap<Player, Boolean> VeulentVoirInfosActionBar() {
+        return voirinfosactionbar;
     }
 }

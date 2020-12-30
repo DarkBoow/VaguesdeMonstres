@@ -210,38 +210,53 @@ public class Taches extends BukkitRunnable {
                 //Les règles changent toutes les heures vers le temps/2 des autres règles
                 //Exemple : 4 zombies toutes les 5 minutes = 4 zombies toutes les 2min30
 
-                for(Map.Entry<Player, ScoreboardSign> boards : main.getBoards().entrySet()){
-                    boards.getValue().setLine(0, "§e");
-                    boards.getValue().setLine(1, "§6Timer : §r" + main.getTimeFormat(main.timer));
-                    boards.getValue().setLine(2, "§b");
-
+                for(Player pls : Bukkit.getOnlinePlayers()){
                     int monstres = 0;
-                    if(main.getMonstres().containsKey(boards.getKey())){
-                        if(main.getMonstres().get(boards.getKey()).size() > 0){
-                            monstres = main.getMonstres().get(boards.getKey()).size();
-                        }
-                    }
-                    String pluriel = "";
-                    if(monstres > 1){
-                        pluriel = "s";
-                    }
-
-                    boards.getValue().setLine(3, ChatColor.AQUA + "Horde : " + ChatColor.WHITE + monstres + " " + "Monstre" + pluriel);
-                    boards.getValue().setLine(4, "§d");
-
-                    int tempsrestant = -1;
 
                     main.restantbasique = main.monstresbasiques - main.timer%main.monstresbasiques;
                     main.restantvener = main.monstresvener - main.timer%main.monstresvener;
-                    if(main.restantbasique <= main.restantvener){
-                        tempsrestant = main.restantbasique;
-                    } else {
-                        tempsrestant = main.restantvener;
+
+                    if(main.getMonstres().containsKey(pls)){
+                        if(main.getMonstres().get(pls).size() > 0){
+                            monstres = main.getMonstres().get(pls).size();
+                        }
                     }
 
-                    boards.getValue().setLine(5, ChatColor.BLUE + "Basiques : " + ChatColor.WHITE + main.getTimeFormat(main.restantbasique));
-                    boards.getValue().setLine(6, "§c");
-                    boards.getValue().setLine(7, ChatColor.DARK_PURPLE + "§lTERRIIIBLE : " + ChatColor.WHITE + main.getTimeFormat(main.restantvener));
+                    String pluriel = "";
+
+                    if(main.getBoards().containsKey(pls)){
+                        main.getBoards().get(pls).setLine(0, "§e");
+                        main.getBoards().get(pls).setLine(1, "§6Timer : §r" + main.getTimeFormat(main.timer));
+                        main.getBoards().get(pls).setLine(2, "§b");
+
+                        if(monstres > 1){
+                            pluriel = "s";
+                        }
+
+                        main.getBoards().get(pls).setLine(3, ChatColor.AQUA + "Horde : " + ChatColor.WHITE + monstres + " " + "Monstre" + pluriel);
+                        main.getBoards().get(pls).setLine(4, "§d");
+
+                        int tempsrestant = -1;
+
+                        if(main.restantbasique <= main.restantvener){
+                            tempsrestant = main.restantbasique;
+                        } else {
+                            tempsrestant = main.restantvener;
+                        }
+
+                        main.getBoards().get(pls).setLine(5, ChatColor.BLUE + "Basiques : " + ChatColor.WHITE + main.getTimeFormat(main.restantbasique));
+                        main.getBoards().get(pls).setLine(6, "§c");
+                        main.getBoards().get(pls).setLine(7, ChatColor.DARK_PURPLE + "§lTERRIIIBLE : " + ChatColor.WHITE + main.getTimeFormat(main.restantvener));
+                    }
+
+                    if(main.VeulentVoirInfosActionBar().get(pls)){
+                        monstres = monstres + 1;
+                        if(monstres > 1){
+                            pluriel = "s";
+                        }
+
+                        main.title.sendActionBar(pls, "§4§l" + monstres + " Monstre" + pluriel + " : §c" + main.getTimeFormat(main.restantbasique) + " §2| §5§lTERRIIIBLE : §9" + main.getTimeFormat(main.restantvener));
+                    }
                 }
 
                 main.timer++;

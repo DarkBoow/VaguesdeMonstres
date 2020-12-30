@@ -79,6 +79,10 @@ public class MonstresEvenement implements Listener {
                 main.getMonstres().put(player, entitytype);
             }
         }
+
+        if(!main.VeulentVoirInfosActionBar().containsKey(player)){
+            main.VeulentVoirInfosActionBar().put(player, true);
+        }
     }
 
     @EventHandler

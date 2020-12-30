@@ -1,6 +1,7 @@
 package fr.darkbow_.vaguesdemonstres;
 
 import net.minecraft.server.v1_16_R3.*;
+import org.bukkit.Bukkit;
 import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
@@ -24,5 +25,9 @@ public class Titles {
         final IChatBaseComponent basetitle = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + message + "\"}");
         final PacketPlayOutChat packet = new PacketPlayOutChat(basetitle, ChatMessageType.GAME_INFO, player.getUniqueId());
         ((CraftPlayer)player).getHandle().playerConnection.sendPacket((Packet)packet);
+    }
+
+    public void sendMessage(Player player, String message){
+        player.sendMessage(message);
     }
 }

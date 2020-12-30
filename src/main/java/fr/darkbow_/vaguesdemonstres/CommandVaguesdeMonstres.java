@@ -132,11 +132,11 @@ public class CommandVaguesdeMonstres implements CommandExecutor {
                 }
             }
 
-            if(args[0].equalsIgnoreCase("tab") || args[0].equalsIgnoreCase("infos") || args[0].equalsIgnoreCase("scoreboard")){
+            if(args[0].equalsIgnoreCase("tab") || args[0].equalsIgnoreCase("scoreboard")){
                 if(sender instanceof Player){
                     Player player = (Player) sender;
                     main.VeulentVoirInfos().put(player, !main.VeutVoirInfos(player));
-                    player.sendMessage(ChatColor.BLUE + "Scoreboard Personnel " + main.bool(main.VeutVoirInfos(player)));
+                    player.sendMessage(ChatColor.BLUE + "Scoreboard Personnel " + main.bool(main.VeutVoirInfos(player), 0));
 
                     if(main.VeutVoirInfos(player)){
                         ScoreboardSign sb = new ScoreboardSign(player, "§c§lVagues de Monstres");
@@ -148,6 +148,20 @@ public class CommandVaguesdeMonstres implements CommandExecutor {
                             main.getBoards().remove(player);
                         }
                     }
+                } else {
+                    sender.sendMessage("§cSeuls les Joueurs peuvent exécuter cette commande.");
+                }
+            }
+
+            if(args[0].equalsIgnoreCase("actionbar")){
+                if(sender instanceof Player){
+                    Player player = (Player) sender;
+                    if(main.VeulentVoirInfosActionBar().containsKey(player)){
+                        main.VeulentVoirInfosActionBar().put(player, !main.VeulentVoirInfosActionBar().get(player));
+                    } else {
+                        main.VeulentVoirInfosActionBar().put(player, false);
+                    }
+                    player.sendMessage(ChatColor.BLUE + "Informations de la Barre d'Actions " + main.bool(main.VeulentVoirInfosActionBar().get(player), 1));
                 } else {
                     sender.sendMessage("§cSeuls les Joueurs peuvent exécuter cette commande.");
                 }
