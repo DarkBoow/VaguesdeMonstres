@@ -24,11 +24,11 @@ public class VaguesdeMonstres extends JavaPlugin {
     private HashMap<Player, Boolean> veulentvoirinfos;
     private HashMap<Player, Boolean> voirinfosactionbar;
     private HashSet<Material> badblocks;
-    public int monstresbasiques = 10; //5 minutes = 300
-    public int monstresbasiquesinitial = 10;
-    public int monstresvener = 15; //20 minutes = 1200
-    public int monstresvenerinitial = 15;
-    public int nextmonstresvener = 0;
+    public int monstresbasiques = 120; //5 minutes = 300
+    public int monstresbasiquesinitial = 120;
+    public int monstresvener = 900; //20 minutes = 1200
+    public int monstresvenerinitial = 900;
+    public int nextmonstresvener = 900;
     public int randomvener = 100;
     public int restantbasique = -1;
     public int restantvener = -1;
