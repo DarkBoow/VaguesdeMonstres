@@ -101,6 +101,10 @@ public class Taches extends BukkitRunnable {
                                 pls.playSound(pls.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
                             }
                         }
+
+                        if(main.monstresbasiques > 15){
+                            main.monstresbasiques -= 3;
+                        }
                     }
 
                     if(main.timer%main.monstresvener == 0){
@@ -213,6 +217,10 @@ public class Taches extends BukkitRunnable {
                         }
 
                         main.nextmonstresvener = main.timer + (main.monstresvener - main.timer%main.monstresvener);
+
+                        if(main.monstresvener > 30){
+                            main.monstresvener -= 15;
+                        }
                     }
                 }
 
@@ -273,6 +281,7 @@ public class Taches extends BukkitRunnable {
                     }
 
                     if(main.VeulentVoirInfosActionBar().get(pls)){
+
                         monstres = monstres + 1;
                         if(monstres > 1){
                             pluriel = "s";
