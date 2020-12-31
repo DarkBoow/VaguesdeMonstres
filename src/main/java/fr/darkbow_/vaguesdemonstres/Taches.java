@@ -103,7 +103,7 @@ public class Taches extends BukkitRunnable {
                         }
 
                         if(main.monstresbasiques > 15){
-                            main.monstresbasiques -= 3;
+                            main.monstresbasiques -= 1;
                         }
                     }
 
@@ -219,7 +219,7 @@ public class Taches extends BukkitRunnable {
                         main.nextmonstresvener = main.timer + (main.monstresvener - main.timer%main.monstresvener);
 
                         if(main.monstresvener > 30){
-                            main.monstresvener -= 15;
+                            main.monstresvener -= 5;
                         }
                     }
                 }
