@@ -34,6 +34,8 @@ public class VaguesdeMonstres extends JavaPlugin {
     public int restantvener = -1;
     public boolean VaguesdeMonstres = false;
     public boolean EstEnPause = false;
+    public HashMap<Player, Integer> nextrandomspawn;
+    public String mode = "Random"; //Progessif existe aussi
 
     private Map<Player, ScoreboardSign> boards;
 
@@ -51,6 +53,7 @@ public class VaguesdeMonstres extends JavaPlugin {
         this.monstres = new HashMap<>();
         this.veulentvoirinfos = new HashMap<>();
         this.voirinfosactionbar = new HashMap<>();
+        this.nextrandomspawn = new HashMap<>();
 
         Random r = new Random();
         this.nextmonstresvener = this.monstresvener;
