@@ -320,7 +320,7 @@ public class Taches extends BukkitRunnable {
                     int mode = r.nextInt(4);
                     switch (mode){
                         case 0: case 1: case 2:
-                            int entitycount = r.nextInt(7) + 1;
+                            int entitycount = r.nextInt(10) + 1;
                             for(int i=0; i<entitycount; i++){
                                 int entite = r.nextInt(6);
 
@@ -422,6 +422,7 @@ public class Taches extends BukkitRunnable {
                             }
 
                             main.getMonstres().get(pls).add(etype);
+                            main.getMonstres().get(pls).add(etype);
                             break;
                     }
 
@@ -445,7 +446,7 @@ public class Taches extends BukkitRunnable {
                             pls.sendMessage("§cSpawn de " + monstres + " Monstre" + pluriel);
                             break;
                         case 3:
-                            pls.sendMessage("§cSpawn d'un Monstre §5§lTERRIFIANT");
+                            pls.sendMessage("§cSpawn des Monstres §5§lTERRIFIANTS");
                             break;
                     }
 
