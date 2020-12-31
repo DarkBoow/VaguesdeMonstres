@@ -320,7 +320,7 @@ public class Taches extends BukkitRunnable {
                     int mode = r.nextInt(4);
                     switch (mode){
                         case 0: case 1: case 2:
-                            int entitycount = r.nextInt(5) + 1;
+                            int entitycount = r.nextInt(7) + 1;
                             for(int i=0; i<entitycount; i++){
                                 int entite = r.nextInt(6);
 
