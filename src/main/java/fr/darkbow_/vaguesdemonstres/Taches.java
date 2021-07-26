@@ -4,10 +4,7 @@ import fr.darkbow_.vaguesdemonstres.scoreboard.ScoreboardSign;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
-import org.bukkit.entity.Creeper;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
@@ -304,6 +301,12 @@ public class Taches extends BukkitRunnable {
 
         if(main.mode.equals("Random")){
             for(Player pls : Bukkit.getOnlinePlayers()){
+                if(!main.nextrandomspawn.containsKey(pls)){
+                    Random r = new Random();
+                    int spawnrandom = r.nextInt(main.getConfig().getInt("Random-Max-Delay")) + 1;
+                    main.nextrandomspawn.put(pls, main.timer + spawnrandom);
+                }
+
                 Random r = new Random();
                 if(main.timer == main.nextrandomspawn.get(pls)){
                     if(!main.getSurvivants().contains(pls)){
@@ -320,7 +323,7 @@ public class Taches extends BukkitRunnable {
                     int mode = r.nextInt(4);
                     switch (mode){
                         case 0: case 1: case 2:
-                            int entitycount = r.nextInt(10) + 1;
+                            int entitycount = r.nextInt(main.getConfig().getInt("Random-Max-Entity-Count")) + 1;
                             for(int i=0; i<entitycount; i++){
                                 int entite = r.nextInt(6);
 
@@ -428,6 +431,23 @@ public class Taches extends BukkitRunnable {
 
                     for(EntityType entitytype : main.getMonstres().get(pls)){
                         Entity entity = VaguesdeMonstres.spawnEntity(entitytype, pls.getLocation(), 5, 3);
+                        if(main.getConfig().getBoolean("Auto-Aggro")){
+                            if(entity instanceof Monster){
+                                Monster monstre = (Monster) entity;
+                                monstre.setTarget(pls);
+                            }
+
+                            if(entity instanceof Slime){
+                                Slime slime = (Slime) entity;
+                                slime.setTarget(pls);
+                            }
+
+                            if(entity instanceof MagmaCube){
+                                MagmaCube magmacube = (MagmaCube) entity;
+                                magmacube.setTarget(pls);
+                            }
+                        }
+
                         if(entitytype == EntityType.CREEPER){
                             boolean lightning_creeper = r.nextBoolean();
                             if(lightning_creeper){
@@ -450,7 +470,7 @@ public class Taches extends BukkitRunnable {
                             break;
                     }
 
-                    int spawnrandom = r.nextInt(240) + 1;
+                    int spawnrandom = r.nextInt(main.getConfig().getInt("Random-Max-Delay")) + 1;
 
                     main.nextrandomspawn.put(pls, main.timer + spawnrandom);
                 }

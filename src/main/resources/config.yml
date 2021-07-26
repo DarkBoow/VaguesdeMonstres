@@ -1,0 +1,4 @@
+mode: "Random"
+Random-Max-Delay: 60
+Random-Max-Entity-Count: 10
+Auto-Aggro: true

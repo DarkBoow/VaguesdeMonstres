@@ -45,7 +45,12 @@ public class VaguesdeMonstres extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        saveDefaultConfig();
         instance = this;
+
+        if(Objects.requireNonNull(getConfig().getString("mode")).equalsIgnoreCase("Progressif")){
+            mode = "Progressif";
+        }
 
         this.boards = new HashMap<>();
 
@@ -65,7 +70,7 @@ public class VaguesdeMonstres extends JavaPlugin {
         badblocks.add(Material.LAVA);
         badblocks.add(Material.FIRE);
 
-        getCommand("vaguesdemonstres").setExecutor(new CommandVaguesdeMonstres(this));
+        Objects.requireNonNull(getCommand("vaguesdemonstres")).setExecutor(new CommandVaguesdeMonstres(this));
         getServer().getPluginManager().registerEvents(new MonstresEvenement(this), this);
 
         System.out.println("[VaguesdeMonstres] Plugin Activé !!");
